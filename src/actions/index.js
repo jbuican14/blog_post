@@ -1,4 +1,4 @@
-import { FETCH_POSTS } from '../constants';
+import { FETCH_POSTS, FETCH_USER } from '../constants';
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 export const fetchPosts = () => async (dispatch) => {
@@ -7,4 +7,10 @@ export const fetchPosts = () => async (dispatch) => {
     type: FETCH_POSTS,
     payload: res.data,
   });
+};
+
+export const fetchUser = (id) => async (dispatch) => {
+  const res = await jsonPlaceholder.get(`users/${id}`);
+
+  dispatch({ type: FETCH_USER, payload: res.data });
 };
