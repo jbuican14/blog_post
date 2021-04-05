@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchPostsAndUsers } from '../actions';
+import UserHeader from './UserHeader';
 
 const PostList = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
 
   useState(() => {
-    dispatch(fetchPosts());
+    dispatch(fetchPostsAndUsers());
   }, [dispatch]);
 
   return (
     <div className="ui relaxed divided list">
       <h1> Post List</h1>
-      {console.log(posts)}
       {posts.length > 0 &&
         posts.map((p) => (
           <div className="item" key={p.id}>
@@ -24,6 +24,7 @@ const PostList = () => {
                 <p>{p.body}</p>
               </div>
             </div>
+            <UserHeader userId={p.userId} />
           </div>
         ))}
     </div>
